@@ -1,0 +1,12 @@
+# Ignore the virtual environment folder
+env/
+
+# Ignore SQLite database
+db.sqlite3
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore Node.js modules
+node_modules/

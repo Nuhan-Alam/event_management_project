@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Event Listing</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="{% static 'css/output.css' %}">
+  </head>
+
+  <body>
+    {% comment %} Level-1 Nav-Bar {% endcomment %}
+     <nav class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex-shrink-0 text-xl font-bold text-indigo-600">
+          EventManager
+        </div>
+        <div class="hidden md:flex space-x-4">
+          <a href="{% url 'home' %}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Home</a>
+          <a href="{% url 'create_event' %}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Add Event</a>
+          <a href="{% url 'participants' %}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Participants</a>
+          <a href="{% url 'categories'%}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Categories</a>
+          <a href="{% url 'dashboard'%}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Dashboard</a>
+        </div>
+        <!-- Mobile menu button -->
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-button" class="text-gray-700 focus:outline-none focus:text-indigo-600">
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 space-y-2">
+      <a href="{% url 'home' %}" class="block text-gray-700 hover:text-indigo-600 font-medium">Home</a>
+      <a href="{% url 'create_event' %}" class="block text-gray-700 hover:text-indigo-600 font-medium">Add Event</a>
+      <a href="{% url 'participants' %}" class="block text-gray-700 hover:text-indigo-600 font-medium">Participants</a>
+      <a href="{% url 'categories'%}" class="block text-gray-700 hover:text-indigo-600 font-medium">Categories</a>
+      <a href="{% url 'dashboard'%}" class="block text-gray-700 hover:text-indigo-600 font-medium">Dashboard</a>
+    </div>
+  </nav>
+
+{% comment %} level-2 serach_bar {% endcomment %}
+ <section class="flex items-center justify-center h-[30vh] bg-gray-50">
+  <div class="w-1/2">
+    <form method="GET" action="{% url 'search' %}" class="flex">
+      <input 
+        type="text" 
+        name="search"
+        placeholder="Search for events..." 
+        class="flex-1 px-6 py-3 border border-gray-300 rounded-l-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-lg"
+        value="{{ request.GET.search }}"
+      />
+      <button 
+        type="submit"
+        class="px-6 py-3 bg-indigo-600 text-white rounded-r-lg hover:bg-indigo-700 transition font-medium"
+      >
+        Search
+      </button>
+    </form>
+  </div>
+</section>
+{% comment %} level-3 Catagory-Dropbar {% endcomment %}
+<!-- Categories Section -->
+<section class="h-[33vh] bg-white flex flex-col items-center justify-center">
+  <!-- Heading -->
+  <div class="mb-3">
+    <h2 class="text-xl font-semibold text-gray-800">Categories (Total - {{counts.total}})</h2>
+  </div>
+
+  <!-- Dropdown -->
+  <div>
+  <select class="w-52 px-4 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700" 
+          onchange="window.location.href='{% url 'home' %}?type=' + this.value">
+    <option value="all" {% if selected_type == 'all' %}selected{% endif %}>All</option>
+    {% for category in categories_with_events %}
+    <option value="{{category.name}}" {% if selected_type == category.name %}selected{% endif %}>
+      {{category.name}}
+    </option>
+    {% endfor %}
+  </select>
+</div>
+</section>
+
+{% comment %} level-4 Lists {% endcomment %}
+<!-- Events Section -->
+<section class="bg-gray-100 px-4 py-8">
+  <div class="space-y-6 flex flex-col items-center">
+    
+    {% for event in event_list %}
+      <!-- Event Row 1 -->
+    <div class=" shadow-md rounded-lg p-4 w-1/2" style="background-image: url('{% static 'pic.png' %}');">
+      <div class="mb-2 text-center">
+        <h3 class="text-5xl	 font-semibold text-white">{{event.name}}</h3>
+      </div>
+      <div class="mb-4 text-white">
+        <p>{{event.description}}</p>
+      </div>
+      <div class="flex justify-between">
+        <a href="{% url 'event_details' event.id %}" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition text-center">Details</a>
+        <a href='{% url "update_event" event.id %}' class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">Edit</a>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</section>
+
+  </body>
+</html>
