@@ -1,138 +1,104 @@
+{% extends "events/structure.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Event Listing</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="{% static 'css/output.css' %}">
-  </head>
-  <body class="bg-gray-100">
-    {% comment %} Level-1 Nav-Bar {% endcomment %}
-     <nav class="bg-white shadow-md">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <div class="flex-shrink-0 text-xl font-bold text-indigo-600">
-          EventManager
-        </div>
-        <div class="hidden md:flex space-x-4">
-          <a href="{% url 'home' %}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Home</a>
-          <a href="{% url 'create_event' %}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Add Event</a>
-          <a href="{% url 'participants' %}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Participants</a>
-          <a href="{% url 'categories'%}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Categories</a>
-          <a href="{% url 'dashboard'%}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Dashboard</a>
-        </div>
-        <!-- Mobile menu button -->
-        <div class="md:hidden flex items-center">
-          <button id="mobile-menu-button" class="text-gray-700 focus:outline-none focus:text-indigo-600">
-            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M4 6h16M4 12h16M4 18h16"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
+{% block title %}Dashboard{% endblock title %}
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 space-y-2">
-      <a href="{% url 'home' %}" class="block text-gray-700 hover:text-indigo-600 font-medium">Home</a>
-      <a href="{% url 'create_event' %}" class="block text-gray-700 hover:text-indigo-600 font-medium">Add Event</a>
-      <a href="{% url 'participants' %}" class="block text-gray-700 hover:text-indigo-600 font-medium">Participants</a>
-      <a href="{% url 'categories'%}" class="block text-gray-700 hover:text-indigo-600 font-medium">Categories</a>
-      <a href="{% url 'dashboard'%}" class="block text-gray-700 hover:text-indigo-600 font-medium">Dashboard</a>
-    </div>
-  </nav>
+{% block content %}
   <!-- Main container with top margin -->
-  <div class="mt-12 ml-12 text-gray-700">
-    
-    <!-- Status Grid Section -->
-    <div class="mb-8">
-      <h2 class="text-xl font-medium mb-6">Status Grid</h2>
+    <div class="mt-12 ml-12 text-gray-700">
       
-      <!-- Status Buttons in 4 rows -->
-      <div class="space-y-4 flex flex-col">
-  <a href="{% url 'dashboard' %}?type=participants" class="w-1/6 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition text-left">
-    Total Participants - {{ counts.total_participants }}
-  </a>
-  <a href="{% url 'dashboard' %}?type=all" class="w-1/6 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition text-left">
-    Total Events - {{ counts.total_events }}
-  </a>
-  <a href="{% url 'dashboard' %}?type=upcoming" class="w-1/6 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition text-left">
-    Upcoming Events - {{ counts.upcoming_events }}
-  </a>
-  <a href="{% url 'dashboard' %}?type=past" class="w-1/6 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition text-left">
-    Past Events - {{ counts.past_events }}
-  </a>
-</div>
+      <!-- Status Grid Section -->
+      <div class="mb-8">
+        <h2 class="text-xl font-medium mb-6">Status Grid</h2>
+        
+        <!-- Status Buttons in 4 rows -->
+        <div class="space-y-4 flex flex-col">
+    <a href="{% url 'dashboard' %}?type=participants" class="w-1/6 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition text-left">
+      Total Participants - {{ counts.total_participants }}
+    </a>
+    <a href="{% url 'dashboard' %}?type=all" class="w-1/6 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition text-left">
+      Total Events - {{ counts.total_events }}
+    </a>
+    <a href="{% url 'dashboard' %}?type=upcoming" class="w-1/6 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition text-left">
+      Upcoming Events - {{ counts.upcoming_events }}
+    </a>
+    <a href="{% url 'dashboard' %}?type=past" class="w-1/6 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition text-left">
+      Past Events - {{ counts.past_events }}
+    </a>
+  </div>
 
-    </div>
-    
-    <!-- Today's Events Section -->
-    <div>
-      <h2 class="text-5xl text-center font-medium mb-6">{{heading}}</h2>
-      <!-- Table will be added here later -->
-    </div>
+      </div>
+      
+      <!-- Today's Events Section -->
+      <div>
+        {% if data %}
+          <h2 class="text-5xl text-center font-medium mb-6">{{heading}}</h2>
+        {% else %}
+          {% comment %} No data {% endcomment %}
+          <div class="py-10 justify-items-center">
+            <h2 class=" text-5xl text-center font-medium mb-6 margin_heading">{{no_data}}</h2>
+            <img src="{% static 'empty.png' %}"alt="Description of image">
+          </div>
+        {% endif %}
+      </div>
 
-    {% comment %} level-4 Lists {% endcomment %}
-<!-- Events Section -->
-<section class="bg-gray-100 px-4 py-8">
-  <div class="space-y-6 flex flex-col items-center">
-    {% if type == "participants" %}
-<table class="w-full table-auto">
-        <thead>
-          <tr>
-            <th class="px-3 py-2 text-center font-medium text-gray-700">Name</th>
-            <th class="px-3 py-2 text-center font-medium text-gray-700" colspan="2">Email</th>
-            <th class="px-3 py-2"></th>
-            <th class="px-3 py-2"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for participant in data %}
-          <tr>
-            <td class="px-3 py-2 text-center">{{participant.name}}</td>
-            <td class="px-3 py-2 text-center" colspan="2">{{participant.email}}</td>
-            <td class="px-3 py-2">
-              <a href='{% url "update_people" participant.id %}' class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">Edit</a>
-            </td>
-            <td class="px-3 py-2">
-              <form action='{% url "delete_people" participant.id %}' method='POST'>
-            {% csrf_token %}
-            <button type='submit' class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700 transition">Delete</button>
-          </form>
-            </td>
-          </tr>
+      {% comment %} level-4 Lists {% endcomment %}
+  <!-- Events Section -->
+  <section class="bg-gray-100 px-4 py-8">
+    <div class="space-y-6 flex flex-col items-center">
+{% comment %} Data is participants {% endcomment %}
+      {% if type == "participants" %}
+        {% if data %}
+          <table class="w-full table-auto">
+                  <thead>
+                    <tr>
+                      <th class="px-3 py-2 text-center font-medium text-gray-700">Name</th>
+                      <th class="px-3 py-2 text-center font-medium text-gray-700" colspan="2">Email</th>
+                      <th class="px-3 py-2"></th>
+                      <th class="px-3 py-2"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for participant in data %}
+                    <tr>
+                      <td class="px-3 py-2 text-center">{{participant.name}}</td>
+                      <td class="px-3 py-2 text-center" colspan="2">{{participant.email}}</td>
+                      <td class="px-3 py-2">
+                        <a href='{% url "update_people" participant.id %}' class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">Edit</a>
+                      </td>
+                      <td class="px-3 py-2">
+                        <form action='{% url "delete_people" participant.id %}' method='POST'>
+                      {% csrf_token %}
+                      <button type='submit' class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700 transition">Delete</button>
+                    </form>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+            </table>
+        {% endif %}
+{% comment %} Data is Event {% endcomment %}
+      {% else %}
+{% comment %} If data Available {% endcomment %}
+        {% if data %}  
+          {% for info in data %}
+          <!-- Event Row 1 -->
+          <div class=" shadow-md rounded-lg p-4 w-1/2" style="background-image: url('{% static 'pic.png' %}');">
+            <div class="mb-2 text-center">
+              <h3 class="text-5xl	 font-semibold text-white">{{info.name}}</h3>
+            </div>
+            <div class="mb-4 text-white">
+              <p>{{info.description}}</p>
+            </div>
+            <div class="flex justify-between">
+              <button class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">Details</button>
+              <button class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">Edit</button>
+            </div>
+          </div>
           {% endfor %}
-        </tbody>
-      </table>
+        {% endif %}
+      {% endif %}
 
-    {% else %}
-    {% for info in data %}
-    <!-- Event Row 1 -->
-    <div class=" shadow-md rounded-lg p-4 w-1/2" style="background-image: url('{% static 'pic.png' %}');">
-      <div class="mb-2 text-center">
-        <h3 class="text-5xl	 font-semibold text-white">{{info.name}}</h3>
-      </div>
-      <div class="mb-4 text-white">
-        <p>{{info.description}}</p>
-      </div>
-      <div class="flex justify-between">
-        <button class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">Details</button>
-        <button class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">Edit</button>
-      </div>
     </div>
-    {% endfor %}
-    {% endif %}
-  
-
-    
-
-
-
+  </section>  
   </div>
-</section>
-    
-  </div>
-</body>
-</html>
+{% endblock content %}

@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock title %}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+  {% comment %} <link rel="stylesheet" href="{% static 'css/output.css' %}"> {% endcomment %}
+  </head>
+
+  <body>
+    {% comment %} Level-1 Nav-Bar {% endcomment %}
+     <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex-shrink-0 text-xl font-bold text-indigo-600">
+            EventManager
+            </div>
+            <div class="hidden md:flex space-x-4">
+            <a href="{% url 'home' %}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Home</a>
+            <a href="{% url 'create_event' %}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Add Event</a>
+            <a href="{% url 'participants' %}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Participants</a>
+            <a href="{% url 'categories'%}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Categories</a>
+            <a href="{% url 'dashboard'%}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Dashboard</a>
+            </div>
+            <!-- Mobile menu button -->
+            <div class="md:hidden flex items-center">
+            <button id="mobile-menu-button" class="text-gray-700 focus:outline-none focus:text-indigo-600">
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+            </div>
+        </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 space-y-2">
+        <a href="{% url 'home' %}" class="block text-gray-700 hover:text-indigo-600 font-medium">Home</a>
+        <a href="{% url 'create_event' %}" class="block text-gray-700 hover:text-indigo-600 font-medium">Add Event</a>
+        <a href="{% url 'participants' %}" class="block text-gray-700 hover:text-indigo-600 font-medium">Participants</a>
+        <a href="{% url 'categories'%}" class="block text-gray-700 hover:text-indigo-600 font-medium">Categories</a>
+        <a href="{% url 'dashboard'%}" class="block text-gray-700 hover:text-indigo-600 font-medium">Dashboard</a>
+        </div>
+  </nav>
+  {% block content %}
+  {% endblock content %}
+  </body>
+  <footer class="bg-gray-800 text-white py-8">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-wrap justify-between">
+          <div class="w-full md:w-1/4 mb-8 md:mb-0">
+            <h3 class="text-lg font-semibold mb-4">Event Manager</h3>
+            <p class="text-gray-400">
+              Easy Solution to handle all your events
+            </p>
+          </div>
+          <div class="w-full md:w-1/4 mb-8 md:mb-0">
+            <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul class="text-gray-400 space-y-2">
+              <li><a href="#" class="hover:text-white">Home</a></li>
+              <li><a href="#" class="hover:text-white">Features</a></li>
+              <li><a href="#" class="hover:text-white">Pricing</a></li>
+              <li><a href="#" class="hover:text-white">Contact</a></li>
+            </ul>
+          </div>
+          <div class="w-full md:w-1/4 mb-8 md:mb-0">
+            <h4 class="text-lg font-semibold mb-4">Connect</h4>
+            <ul class="text-gray-400 space-y-2">
+              <li><a href="#" class="hover:text-white">Twitter</a></li>
+              <li><a href="#" class="hover:text-white">LinkedIn</a></li>
+              <li><a href="#" class="hover:text-white">Facebook</a></li>
+            </ul>
+          </div>
+          <div class="w-full md:w-1/4">
+            <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+            <form class="flex">
+              <input
+                type="email"
+                placeholder="Your email"
+                class="w-full px-3 py-2 text-gray-700 bg-gray-200 rounded-l-md focus:outline-none"
+                required
+              />
+              <button
+                type="submit"
+                class="p-2 bg-indigo-600 text-white rounded-r-lg hover:bg-indigo-700 transition font-normal"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-700 mt-12 pt-8 text-sm text-center text-gray-400"
+        >
+          &copy; 2023 TaskMaster. All rights reserved.
+        </div>
+      </div>
+    </footer>
+</html>

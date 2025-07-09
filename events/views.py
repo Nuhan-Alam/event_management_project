@@ -178,6 +178,7 @@ def dashboard(request):
     today = timezone.now().date()
     data = Event.objects.filter(date=today)
     heading = "Today's Event"
+    No_data = "There is no event today"
     counts = Category.objects.aggregate(
     total_categories=Count('id'),
     total_events=Count('events', distinct=True),
@@ -189,18 +190,22 @@ def dashboard(request):
     if type == 'all':
         data = Event.objects.all()
         heading = "All Event"
+        No_data = "No events has been added yet"
     elif type == 'upcoming':
         data = Event.objects.filter(date__gt=today)
         heading = "Upcoming Events"
+        No_data = "No upcoming event on the list"
     elif type == 'past':
         data = Event.objects.filter(date__lt=today)
         heading = "Past Event"
+        No_data = "No past event on the list"
     elif type == 'participants':
         data = Participant.objects.all()
         heading = "All Participants"
+        No_data = "No participant has been added yet"
 
     
-    context = {"counts":counts,"data":data,"type":type,"heading":heading}
+    context = {"counts":counts,"data":data,"type":type,"heading":heading,"no_data":No_data}
     return render(request,"events/dashboard.html",context)
 
 def successful(request):
@@ -217,9 +222,6 @@ def search_events(request):
             Q(name__icontains=search_query) | 
             Q(location__icontains=search_query)
         )
-    else:
-        events = "empty"
-    
     context = {
         'event_list': events,
         'search_query': search_query,

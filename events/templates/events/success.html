@@ -1,27 +1,23 @@
+{% extends "events/structure.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Event Listing</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="{% static 'css/output.css' %}">
-  </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
-    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-12 rounded-lg shadow-2xl text-center max-w-md w-full">
-        <i class="fas fa-thumbs-up text-6xl mb-6 text-indigo-100"></i>
-        {% if messages %}
+{% block title %}Congratulation{% endblock title %}
+
+ {% block content %}
+    <div class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4">
+        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-12 rounded-lg shadow-2xl text-center max-w-md w-full">
+            <i class="fas fa-thumbs-up text-6xl mb-6 text-indigo-100"></i>
+            {% if messages %}
                 {% for message in messages %}
                     {% if message.tags == 'success' %}
                     <h1 class="text-3xl font-bold">{{message}}</h1>
                     {% endif %}
-              
                 {% endfor %}
             {% endif %}
+        </div>
+        
+        <a href="{% url 'home' %}" class="mt-6 inline-flex items-center px-6 py-3 bg-white text-indigo-600 font-semibold rounded-lg shadow-md hover:bg-gray-50 transition-colors duration-200">
+            <i class="fas fa-house mr-2"></i>
+            Return Home
+        </a>
     </div>
-    
-    <a href="{% url 'home' %}" class="mt-6 inline-flex items-center px-6 py-3 bg-white text-indigo-600 font-semibold rounded-lg shadow-md hover:bg-gray-50 transition-colors duration-200">
-        <i class="fas fa-house mr-2"></i>
-        Return Home
-    </a>
-</body>
+{% endblock content %}
