@@ -1,5 +1,6 @@
 from django import forms
-from events.models import Category,Event,Participant
+from events.models import Category,Event
+from django.contrib.auth.models import User, Permission, Group
 
 # Styles
 default_styles= "border-2 border-gray-300 w-full rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 p-3 transition"
@@ -10,7 +11,7 @@ label_styles = "block text-gray-700 font-medium mb-2"
 class EventModelForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ['name','description','date','time','location','category']
+        fields = ['name','description','date','time','location','category','event_image']
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': default_styles + "p-3" ,
@@ -79,26 +80,26 @@ class CateModelForm(forms.ModelForm):
     #         field.label_classes = label_styles
 
 
-class ParticipantModelForm(forms.ModelForm):
-    class Meta:
-        model = Participant
-        fields = ['name','email','events']
-        widgets = {
-            'name': forms.TextInput(attrs={
-                'class': default_styles + "p-3" ,
-                'placeholder':"Event Name"
-            }),
-             'email': forms.EmailInput(attrs={   
-        'class': default_styles + " p-3",  
-        'placeholder': "Email",
-    }),
-            'events': forms.CheckboxSelectMultiple(attrs={
-                'class': "space-y-2",  # Added spacing between checkboxes for better readability
-            }),
-        }
-        labels = {
-            'name': 'Participant Name',
-            'email': 'Email Address', 
-            'events': 'Events', 
-        }
+# class ParticipantModelForm(forms.ModelForm):
+#     class Meta:
+#         model = User
+#         fields = ['name','email','events']
+#         widgets = {
+#             'name': forms.TextInput(attrs={
+#                 'class': default_styles + "p-3" ,
+#                 'placeholder':"Event Name"
+#             }),
+#              'email': forms.EmailInput(attrs={   
+#         'class': default_styles + " p-3",  
+#         'placeholder': "Email",
+#     }),
+#             'events': forms.CheckboxSelectMultiple(attrs={
+#                 'class': "space-y-2",  # Added spacing between checkboxes for better readability
+#             }),
+#         }
+#         labels = {
+#             'name': 'Participant Name',
+#             'email': 'Email Address', 
+#             'events': 'Events', 
+#         }
     

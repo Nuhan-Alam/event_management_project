@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock title %}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+<body>
+    
+
+    
+
+    <div class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4">
+        {% comment %} <img src="{% static 'no_permission.png' %}" alt="Description of image" class="w-32"> {% endcomment %}
+        <div class="bg-gradient-to-r from-red-500 to-red-800 text-white p-12 rounded-lg shadow-2xl text-center content-center max-w-md w-full">
+            
+            <h2 class = "text-2xl font-semibold">You do not have permission to access this page</h2>
+        </div>
+        
+        <a href="{% url 'home' %}" class="mt-6 inline-flex items-center px-6 py-3 bg-white text-indigo-600 font-semibold rounded-lg shadow-md hover:bg-gray-50 transition-colors duration-200">
+            <i class="fas fa-house mr-2"></i>
+            Return Home
+        </a>
+    </div>
+
+
+
+</body>
+</html>

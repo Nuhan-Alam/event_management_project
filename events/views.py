@@ -3,12 +3,26 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Count, Q
 from django.http import JsonResponse
-from events.models import Event, Participant, Category
-from events.forms import EventModelForm,CateModelForm,ParticipantModelForm
+from events.models import Event,Category
+from events.forms import EventModelForm,CateModelForm
 from django.utils import timezone
+from django.contrib.auth.models import User, Permission, Group
+from users.forms import CustomRegistrationForm
+from django.contrib.auth.decorators import login_required, user_passes_test
+from users.views import is_organizer,is_admin,is_admin_or_organizer
+from django.core.mail import send_mail
+from django.conf import settings
 
-
+@login_required
 def home(request):
+
+    # Debug
+    user= request.user
+    user_group = request.user.groups.first()
+    print(f"Current user: {user}")
+    # print(f"User groups: {list(request.user.groups.values_list('name', flat=True))}")
+    # print(f"Is admin check: {is_admin(request.user)}")
+
     type = request.GET.get('type', 'all')
     
     # Get category count
@@ -29,10 +43,12 @@ def home(request):
         "categories_with_events": categories_with_events,
         "event_list": event_list,
         "counts": counts,
-        "selected_type": type
+        "selected_type": type,
+        'current_user': request.user,
     }
     return render(request, "events/home.html", context)
 
+@login_required
 def event_details(request, event_id):
     event = Event.objects.select_related('category').prefetch_related('participants').get(id=event_id)
     context = {
@@ -40,11 +56,13 @@ def event_details(request, event_id):
     }
     return render(request, 'events/event_details.html', context)
 
+@login_required
 def participants(request):
-    all_participants = Participant.objects.all()
-    context = {"participants": all_participants}
+    participants = User.objects.filter(groups__name='Participant').distinct('id')
+    context = {"participants": participants}
     return render(request,"events/participants.html",context)
 
+@login_required
 def categories(request):
     all_cate = Category.objects.all()
     context = {"category":all_cate}
@@ -54,11 +72,12 @@ def categories(request):
 
 
 #Evant-Functions
+@user_passes_test(is_admin_or_organizer, login_url='no-permission')
 def create_event(request):
     form = EventModelForm() #You don't have to menually provide employee
     print(form.fields)
     if request.method=="POST":
-        form = EventModelForm(request.POST)
+        form = EventModelForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, "Event Created Successfully")
@@ -66,6 +85,7 @@ def create_event(request):
             #return render(request,"events/create_event.html",{"form": form,"message": "New Event Created!!!"})
     return render(request,"events/create_event.html",{"form": form})
 
+@user_passes_test(is_admin_or_organizer, login_url='no-permission')
 def update_event(request,id):
     event = Event.objects.get(id=id)
     form = EventModelForm(instance=event)
@@ -78,6 +98,7 @@ def update_event(request,id):
             return redirect('successful')
     return render(request,"events/create_event.html",{"form": form})
 
+@user_passes_test(is_admin_or_organizer, login_url='no-permission')
 def delete_event(request,id):
     if request.method=="POST":
         event = Event.objects.get(id=id)
@@ -95,6 +116,7 @@ def delete_event(request,id):
 
 
 #Category-Functions
+@user_passes_test(is_admin_or_organizer, login_url='no-permission')
 def create_cate(request):
     form = CateModelForm() #You don't have to menually provide employee
     print(form.fields)
@@ -106,6 +128,7 @@ def create_cate(request):
             return redirect('successful')
     return render(request,"events/create_cate.html",{"form": form})
 
+@user_passes_test(is_admin_or_organizer, login_url='no-permission')
 def update_cate(request,id):
     category = Category.objects.get(id=id)
     form = CateModelForm(instance=category)
@@ -118,6 +141,7 @@ def update_cate(request,id):
             return redirect('successful')
     return render(request,"events/create_cate.html",{"form": form})
 
+@user_passes_test(is_admin_or_organizer, login_url='no-permission')
 def delete_cate(request,id):
     if request.method=="POST":
         category = Category.objects.get(id=id)
@@ -135,32 +159,34 @@ def delete_cate(request,id):
 
 
 #Add_Participants
-def add_people(request):
-    form = ParticipantModelForm() #You don't have to menually provide employee
-    print(form.fields)
-    if request.method=="POST":
-        form = ParticipantModelForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "New Participant Added to the List")
-            return redirect('successful')
-    return render(request,"events/add_people.html",{"form": form})
+# def add_people(request):
+#     form = ParticipantModelForm() #You don't have to menually provide employee
+#     print(form.fields)
+#     if request.method=="POST":
+#         form = ParticipantModelForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, "New Participant Added to the List")
+#             return redirect('successful')
+#     return render(request,"events/add_people.html",{"form": form})
 
+@user_passes_test(is_admin, login_url='no-permission')
 def update_people(request,id):
-    people = Participant.objects.get(id=id)
-    form = ParticipantModelForm(instance=people)
+    people = User.objects.get(id=id)
+    form = CustomRegistrationForm(instance=people)
     print(form.fields)
     if request.method=="POST":
-        form = ParticipantModelForm(request.POST,instance=people)
+        form = CustomRegistrationForm(request.POST,instance=people)
         if form.is_valid():
             form.save()
             messages.success(request, "Participant Details Updated Successfully")
             return redirect('successful')
     return render(request,"events/add_people.html",{"form": form})
 
+@user_passes_test(is_admin_or_organizer, login_url='no-permission')
 def delete_people(request,id):
     if request.method=="POST":
-        people = Participant.objects.get(id=id)
+        people = User.objects.get(id=id)
         people.delete()
         messages.success(request, 'Participant Removed From The List')
         return redirect('participants')
@@ -200,7 +226,7 @@ def dashboard(request):
         heading = "Past Event"
         No_data = "No past event on the list"
     elif type == 'participants':
-        data = Participant.objects.all()
+        data = User.objects.all()
         heading = "All Participants"
         No_data = "No participant has been added yet"
 
@@ -227,3 +253,31 @@ def search_events(request):
         'search_query': search_query,
     }
     return render(request, 'events/search.html', context)
+
+
+# @login_required
+# def rsvp_event(request, event_id):
+    
+#     event = get_object_or_404(Event, id=event_id)
+
+#     event.participants.add(request.user)
+#     event.save()
+
+#     # Send confirmation email
+#     send_mail(
+#         subject=f'RSVP Confirmation for {event.name}',
+#         message=f'Dear {request.user.first_name},\n\nYou have successfully RSVPed for the event "{event.name}" on {event.date}.\n\nThank you!',
+#         from_email=settings.EMAIL_HOST_USER,
+#         recipient_list=[request.user.email],
+#         fail_silently=True,
+#     )
+
+#     # messages.success(request, "RSVP successful! A confirmation email has been sent.")
+
+#     return redirect('home')
+
+@login_required
+def rsvp_event(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    event.participants.add(request.user)
+    return redirect('home')

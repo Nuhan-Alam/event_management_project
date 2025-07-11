@@ -1,12 +1,12 @@
 from django.contrib import admin
 from django.urls import path,include
-from events.views import home,participants,categories,create_event,dashboard,create_cate,add_people,event_details,successful,update_event,delete_event,update_cate,delete_cate,update_people,delete_people,search_events
+from events.views import home,participants,categories,create_event,dashboard,create_cate,event_details,successful,update_event,delete_event,update_cate,delete_cate,update_people,delete_people,search_events,rsvp_event
 # from users import views
 # from users.views import user_dashboard,task_create,view_task,manager_dashboard;
 
 urlpatterns = [
-    path('home/', home,name='home'),
-    path('serach/', search_events,name='search'),
+    path('event-list/', home,name='home'),
+    path('search/', search_events,name='search'),
     path('event_details/<int:event_id>/', event_details,name='event_details'),
     path('participants/', participants,name='participants'),
     path('categories/', categories,name='categories'),
@@ -23,7 +23,7 @@ urlpatterns = [
 
 
 
-    path('add_participants/', add_people,name='add_people'),
+    path('add_participants/<int:event_id>/', rsvp_event,name='rsvp-event'),
     path('update_partcipants/<int:id>/', update_people,name='update_people'),
     path('delete_partcipants/<int:id>/', delete_people,name='delete_people'),
 

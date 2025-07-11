@@ -31,6 +31,12 @@
             <div class="grid md:grid-cols-2 gap-8">
               <!-- Left Column - Description -->
               <div>
+                {% comment %} Image {% endcomment %}
+                 <div class="bg-white p-6 rounded-lg shadow-sm flex justify-center">
+                    {% if event.event_image %}
+                        <img src="{{ event.event_image.url }}" class="w-full rounded-lg" />
+                    {% endif %}
+                  </div>
                 <h2 class="text-2xl font-semibold mb-4 text-gray-800">
                   Description
                 </h2>
@@ -132,18 +138,21 @@
               <p class="text-gray-600">No participants registered yet.</p>
             </div>
             {% endif %} {% comment %} Button {% endcomment %}
-            <div class="mt-8 pt-8 border-t border-gray-200 flex space-x-4">
-              <a
-                href='{% url "update_event" event.id %}'
-                class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
-              >
-                Edit Event
-              </a>
-              <form action='{% url "delete_event" event.id %}' method='POST'>
-            {% csrf_token %}
-            <button type='submit' class="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-700 transition">Delete Event</button>
-          </form>
-            </div>
+              {% if request.user.groups.first.name != "Participant" %}
+                <div class="mt-8 pt-8 border-t border-gray-200 flex space-x-4">
+                      <a
+                        href='{% url "update_event" event.id %}'
+                        class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
+                      >
+                        Edit Event
+                      </a>
+                      <form action='{% url "delete_event" event.id %}' method='POST'>
+                    {% csrf_token %}
+                    <button type='submit' class="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-700 transition">Delete Event</button>
+                  </form>
+                </div>
+              {% endif %}
+      
           </div>
         </div>
       </div>

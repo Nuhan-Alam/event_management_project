@@ -1,0 +1,24 @@
+ <div class="hidden md:flex space-x-4"> 
+
+    {% comment %} Event {% endcomment %}
+        <div class="relative group">
+        <button class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md font-medium transition flex items-center space-x-1">
+            <span>Events</span>
+            <svg class="w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </button>
+        
+        <!-- Dropdown Menu -->
+        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            <div class="py-1">
+                <a href="{% url 'create_event' %}" class="block px-4 py-2 text-sm text-gray-700 hover:text-indigo-600 transition">Create Event</a>
+                <a href="{% url 'home' %}" class="block px-4 py-2 text-sm text-gray-700 hover:text-indigo-600 transition">Event List</a>
+            </div>
+        </div>
+    </div>
+    <a href="{% url 'categories'%}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Categories</a>
+    {% comment %} <a href="{% url 'dashboard'%}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Dashboard</a> {% endcomment %}
+    <a href="{% url 'logout'%}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Log Out</a>
+</div>
+ 

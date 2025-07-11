@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.validators import EmailValidator
-
+from django.contrib.auth.models import User, Permission, Group
 
 class Category(models.Model):
     """
@@ -30,6 +30,15 @@ class Event(models.Model):
         on_delete=models.CASCADE,
         related_name='events'
     )
+
+    participants = models.ManyToManyField(
+        User,
+        related_name='registered_events',
+        blank=True
+    )
+
+    event_image = models.ImageField(upload_to='event_images',  blank=True, null=True,
+                              default="default_event_img.png")
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -38,24 +47,24 @@ class Event(models.Model):
         return f"{self.name} - {self.date} at {self.time}"
 
 
-class Participant(models.Model):
-    """
-    Participant model with ManyToMany relationship to Event
-    """
-    name = models.CharField(max_length=150)
-    email = models.EmailField(
-        unique=True,
-        validators=[EmailValidator()]
-    )
-    events = models.ManyToManyField(
-        Event,
-        related_name='participants',
-        blank=True
-    )
+# class Participant(models.Model):
+#     """
+#     Participant model with ManyToMany relationship to Event
+#     """
+#     name = models.CharField(max_length=150)
+#     email = models.EmailField(
+#         unique=True,
+#         validators=[EmailValidator()]
+#     )
+#     events = models.ManyToManyField(
+#         Event,
+#         related_name='participants',
+#         blank=True
+#     )
     
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
     
-    def __str__(self):
-        return f"{self.name} ({self.email})"
+#     def __str__(self):
+#         return f"{self.name} ({self.email})"
     

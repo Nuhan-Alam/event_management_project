@@ -1,0 +1,28 @@
+{% extends "events/structure.html" %}
+{% load static %}
+{% block title %}My List{% endblock title %}
+
+{% block content %}
+{% comment %} level-4 Lists {% endcomment %}
+<!-- Events Section -->
+<section class="bg-gray-100 px-4 py-8">
+  <div class="space-y-6 flex flex-col items-center">
+    
+    {% for event in event_list %}
+      <!-- Event Row 1 -->
+    <div class=" shadow-md rounded-lg p-4 w-1/2" style="background-image: url('{% static 'pic.png' %}');">
+      <div class="mb-2 text-center">
+        <h3 class="text-5xl	 font-semibold text-white">{{event.name}}</h3>
+      </div>
+      <div class="mb-4 text-white">
+        <p>{{event.description}}</p>
+      </div>
+      <div class="flex justify-between">
+        <a href="{% url 'event_details' event.id %}" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition text-center">Details</a>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</section>
+{% endblock content %}

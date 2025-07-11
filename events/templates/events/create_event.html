@@ -14,7 +14,7 @@
             <p class="text-indigo-700 text-4xl text-center">{{message}}</p>
             {% endif %}
           </div>
-          <form method="POST" class="space-y-6">
+          <form method="POST" enctype="multipart/form-data" class="space-y-6">
             {% csrf_token %} {% for field in form %}
             <div class="mb-4">
               <label
