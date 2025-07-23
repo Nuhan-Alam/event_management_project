@@ -230,3 +230,16 @@ class ProfileView(TemplateView):
         context['member_since'] = user.date_joined
         context['last_login'] = user.last_login
         return context
+    
+class EditProfileView(UpdateView):
+    model = User
+    form_class = EditProfileForm
+    template_name = 'accounts/update_profile.html'
+    context_object_name = 'form'
+
+    def get_object(self):
+        return self.request.user
+
+    def form_valid(self, form):
+        form.save()
+        return redirect('profile')

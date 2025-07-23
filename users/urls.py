@@ -14,7 +14,8 @@ from users.views import (
     CustomPasswordResetView,
     CustomPasswordResetConfirmView,
     ChangePassword,
-    CustomPasswordChangeDoneView
+    CustomPasswordChangeDoneView,
+    EditProfileView
 )
 from django.contrib.auth.views import LogoutView, PasswordChangeView, PasswordChangeDoneView
 urlpatterns = [
@@ -29,7 +30,10 @@ urlpatterns = [
     path('admin/create-group/', create_group, name='create-group'),
     path('admin/group-list/', group_list, name='group-list'),
     path('my_list/', my_list, name='my-list'),
+
+    
     path('profile/', ProfileView.as_view(), name='profile'),
+    path('edit-profile/', EditProfileView.as_view(), name='edit_profile'),
     
     path('password-change/', ChangePassword.as_view(), name='password_change'),
     path('password-change/done/', CustomPasswordChangeDoneView.as_view(), name='password_change_done'),

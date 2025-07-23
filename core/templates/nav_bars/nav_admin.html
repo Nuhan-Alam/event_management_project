@@ -40,6 +40,7 @@
     <a href="{% url 'participants' %}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Participants</a>
     <a href="{% url 'categories'%}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Categories</a>
     {% comment %} <a href="{% url 'dashboard'%}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Dashboard</a> {% endcomment %}
+    <a href="{% url 'profile'%}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Profile</a>
     <form method="POST" action="{% url 'logout' %}">
         {% csrf_token %}
         <button type="submit" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Logout</button>
