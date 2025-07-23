@@ -15,7 +15,9 @@
             {% endif %}
           </div>
           <form method="POST" class="space-y-6">
-            {% csrf_token %} {% for field in form %}
+            {% csrf_token %} 
+            <h2 class='my-4 text-3xl text-center font-bold text-indigo-600'> Create A New Category</h2>
+            {% for field in form %}
             <div class="mb-4">
               <label
                 for="{{ field.id_for_label }}"

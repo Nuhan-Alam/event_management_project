@@ -6,12 +6,16 @@ from django.http import JsonResponse
 from events.models import Event,Category
 from events.forms import EventModelForm,CateModelForm
 from django.utils import timezone
-from django.contrib.auth.models import User, Permission, Group
+from django.contrib.auth.models import Permission, Group
 from users.forms import CustomRegistrationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from users.views import is_organizer,is_admin,is_admin_or_organizer
 from django.core.mail import send_mail
 from django.conf import settings
+
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
 
 @login_required
 def home(request):

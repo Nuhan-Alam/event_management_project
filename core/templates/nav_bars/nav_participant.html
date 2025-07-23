@@ -1,6 +1,9 @@
  <div class="hidden md:flex space-x-4"> 
     <a href="{% url 'home' %}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">All Events</a>
     <a href="{% url 'my-list'%}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">My RSVP List</a>
-    <a href="{% url 'logout'%}" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Log Out</a>
+    <form method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit" class="text-gray-700 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Logout</button>
+</form>
 </div>
  

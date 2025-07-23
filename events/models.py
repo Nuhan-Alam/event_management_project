@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import EmailValidator
 from django.contrib.auth.models import User, Permission, Group
-
+from django.conf import settings
 class Category(models.Model):
     """
     Category model for event classification
@@ -32,7 +32,7 @@ class Event(models.Model):
     )
 
     participants = models.ManyToManyField(
-        User,
+        settings.AUTH_USER_MODEL,
         related_name='registered_events',
         blank=True
     )

@@ -15,9 +15,14 @@
      <nav class="bg-white shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
-            <div class="flex-shrink-0 text-xl font-bold text-indigo-600">
-            EventManager
+            <div class='flex'>
+              <img src="{% static 'logo_black.png' %}" alt="" class = 'w-10 m-1'>
+              <div class="flex-shrink-0 ">
+              <h2 class='text-xl font-bold text-indigo-600'>What's Today?</h2>
+              <h2 class='text-sm font-normal text-black'>Manage your events</h2>
             </div>
+            </div>
+            
             
             {% if request.user.groups.first.name == "Admin" %}
                 <!-- Admin navigation -->
@@ -59,7 +64,10 @@
       <div class="container mx-auto px-6">
         <div class="flex flex-wrap justify-between">
           <div class="w-full md:w-1/4 mb-8 md:mb-0">
-            <h3 class="text-lg font-semibold mb-4">Event Manager</h3>
+            <div class='flex items-center'>
+              <img src="{% static 'logo_white.png' %}" alt="" class = 'w-10 m-2'>
+              <h3 class="text-3xl font-semibold">What's Today?</h3>
+            </div>
             <p class="text-gray-400">
               Easy Solution to handle all your events
             </p>

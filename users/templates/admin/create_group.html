@@ -9,6 +9,7 @@
             {% endfor %}
         </ul>
         <form method='POST'>
+            <h2 class='my-4 text-3xl text-center font-bold text-indigo-600'> Create New Group for the Users</h2>
             {% csrf_token %}
             {{form}}
             <button type="submit" class="px-2 py-1 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition font-normal">Create Group</button>
