@@ -51,11 +51,8 @@
           </tbody>
         </table>
       {% else %}
-        {% comment %} Empty List {% endcomment %}
-          <div class="py-10 justify-items-center">
-            <h2 class=" text-5xl text-center font-medium mb-6 margin_heading">No participant has been added yet</h2>
-            <img src="{% static 'empty.png' %}"alt="Description of image">
-          </div>
+          {% comment %} Empty List {% endcomment %}
+          {% include 'empty_list.html' with message="No participant has been added yet"%}
       {% endif %}
     </section>
 

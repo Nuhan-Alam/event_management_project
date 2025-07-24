@@ -1,0 +1,7 @@
+{% load static %}
+<div class="py-10 justify-items-center">
+  <h2 class="text-5xl text-center font-medium mb-6 margin_heading">
+   {{ message|default:"No participant has been added yet" }}
+  </h2>
+  <img src="{% static 'empty.png' %}" alt="Description of image">
+</div>

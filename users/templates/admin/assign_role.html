@@ -10,7 +10,7 @@
         </ul>
         <form method='POST'>
             {% csrf_token %}
-            {{form}}
+            <div class="my-5">{{form}}</div>
             <button type="submit" class="px-2 py-1 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition font-normal">Assign Role</button>
         </form>
     </div>

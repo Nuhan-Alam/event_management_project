@@ -11,6 +11,8 @@ from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordRes
 from django.urls import reverse_lazy
 from users.forms import CustomPasswordResetConfirmForm,CustomPasswordResetForm,CustomPasswordChangeForm,EditProfileForm
 from django.views.generic import TemplateView,UpdateView
+from django.views.generic import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -53,6 +55,24 @@ def sign_up(request):
         else:
             print("Form is not valid")
     return render(request, 'registration/register.html', {"form": form})
+
+# No:1 Conversion to class based view
+class SignUpView(CreateView):
+    form_class = CustomRegistrationForm
+    template_name = 'registration/register.html'
+    success_url = reverse_lazy('sign-in')
+    
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        user.set_password(form.cleaned_data.get('password'))
+        user.is_active = False
+        user.save()
+        messages.success(self.request, 'A Confirmation mail sent. Please check your email')
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        print("Form is not valid")
+        return super().form_invalid(form)
 
 def sign_in(request):
     form = LoginForm()
@@ -137,6 +157,20 @@ def group_list(request):
     groups = Group.objects.prefetch_related('permissions').all()
     return render(request, 'admin/group_list.html', {'groups': groups})
 
+# No:5 Conversion to class based view
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.views.generic import ListView
+class GroupListView(UserPassesTestMixin, ListView):
+    model = Group
+    template_name = 'admin/group_list.html'
+    context_object_name = 'groups'
+    login_url = 'no-permission'
+    
+    def test_func(self):
+        return is_admin(self.request.user)
+    
+    def get_queryset(self):
+        return Group.objects.prefetch_related('permissions').all()
 
 def activate_user(request, user_id, token):
     try:
@@ -156,8 +190,17 @@ def activate_user(request, user_id, token):
 def my_list(request):
     user_events = request.user.registered_events.all()
     return render(request, 'participant/my_list.html', {'event_list': user_events})
+# No:4 Conversion to class based view
+class MyListView(LoginRequiredMixin, TemplateView):
+    template_name = 'participant/my_list.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_events = self.request.user.registered_events.all()
+        context['event_list'] = user_events
+        return context
 
-
+# No:2 Conversion to class based view
 from django.contrib.auth.views import LoginView
 class CustomLoginView(LoginView):
     form_class = LoginForm

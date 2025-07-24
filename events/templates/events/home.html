@@ -1,8 +1,12 @@
 {% extends "events/structure.html" %}
 {% load static %}
-{% block title %}Home Page{% endblock title %}
+{% block title %}Events{% endblock title %}
 
 {% block content %}
+{% if counts.total == 0%}
+  {% comment %} Empty List {% endcomment %}
+  {% include 'empty_list.html' with message="No Event has been added yet!"%}
+{% else %}
 {% comment %} level-2 serach_bar {% endcomment %}
  <section class="my-10 flex items-center justify-center h-[30vh] bg-gray-50">
   <div class="w-1/2">
@@ -85,4 +89,5 @@
 
   </div>
 </section>
+{% endif %}
 {% endblock content %}

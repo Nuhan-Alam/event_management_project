@@ -15,11 +15,14 @@ from users.views import (
     CustomPasswordResetConfirmView,
     ChangePassword,
     CustomPasswordChangeDoneView,
-    EditProfileView
+    EditProfileView,
+    SignUpView,
+    MyListView,
+    GroupListView
 )
-from django.contrib.auth.views import LogoutView, PasswordChangeView, PasswordChangeDoneView
+from django.contrib.auth.views import LogoutView # No:5 Conversion to class based view
 urlpatterns = [
-    path('sign-up/', sign_up, name='sign-up'),
+    path('sign-up/', SignUpView.as_view(), name='sign-up'),
     # path('sign-in/', sign_in, name='sign-in'),
     path('sign-in/', CustomLoginView.as_view(), name='sign-in'),
     # path('sign-out/', sign_out, name='logout'),
@@ -28,10 +31,10 @@ urlpatterns = [
     path('admin/dashboard/', admin_dashboard, name='admin-dashboard'),
     path('admin/<int:user_id>/assign-role/', assign_role, name='assign-role'),
     path('admin/create-group/', create_group, name='create-group'),
-    path('admin/group-list/', group_list, name='group-list'),
-    path('my_list/', my_list, name='my-list'),
+    path('admin/group-list/', GroupListView.as_view(), name='group-list'),
+    path('my_list/', MyListView.as_view(), name='my-list'),
 
-    
+
     path('profile/', ProfileView.as_view(), name='profile'),
     path('edit-profile/', EditProfileView.as_view(), name='edit_profile'),
     
