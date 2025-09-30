@@ -20,10 +20,12 @@ from core.views import no_permission
 from django.conf import settings
 from django.conf.urls.static import static
 from debug_toolbar.toolbar import debug_toolbar_urls
+from .views import redirect_to_home
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', redirect_to_home,name='root'),
     path('events/', include("events.urls")),
     path('users/', include("users.urls")),
     path('no-permission/', no_permission, name='no-permission')

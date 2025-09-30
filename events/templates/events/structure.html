@@ -12,8 +12,8 @@
 
   <body>
     {% comment %} Level-1 Nav-Bar {% endcomment %}
-     <nav class="bg-white shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <nav class="bg-white shadow-md flex-1">
+        <div class="max-w-7xl mx-auto px-2 lg:px-8">
         <div class="flex justify-between items-center h-16">
             <div class='flex'>
               <img src="{% static 'logo_black.png' %}" alt="" class = 'w-10 m-1'>
@@ -22,9 +22,8 @@
               <h2 class='text-sm font-normal text-black'>Manage your events</h2>
             </div>
             </div>
-            
-            
-            {% if request.user.groups.first.name == "Admin" %}
+            <div class="hidden md:flex space-x-4"> 
+              {% if request.user.groups.first.name == "Admin" %}
                 <!-- Admin navigation -->
                 {% include "nav_bars/nav_admin.html" %}
             {% elif request.user.groups.first.name == "Organizer" %}
@@ -36,6 +35,8 @@
             {% else %}
                 {% include "nav_bars/nav_login.html" %}
             {% endif %}
+</div>
+    
               <!-- Mobile menu button -->
               <div class="md:hidden flex items-center">
               <button id="mobile-menu-button" class="text-gray-700 focus:outline-none focus:text-indigo-600">
@@ -50,12 +51,26 @@
 
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 space-y-2">
-        <a href="{% url 'home' %}" class="block text-gray-700 hover:text-indigo-600 font-medium">Home</a>
-        <a href="{% url 'create_event' %}" class="block text-gray-700 hover:text-indigo-600 font-medium">Add Event</a>
-        <a href="{% url 'participants' %}" class="block text-gray-700 hover:text-indigo-600 font-medium">Participants</a>
-        <a href="{% url 'categories'%}" class="block text-gray-700 hover:text-indigo-600 font-medium">Categories</a>
-        <a href="{% url 'dashboard'%}" class="block text-gray-700 hover:text-indigo-600 font-medium">Dashboard</a>
+{% if request.user.groups.first.name == "Admin" %}
+                <!-- Admin navigation -->
+                {% include "nav_bars/nav_admin.html" %}
+            {% elif request.user.groups.first.name == "Organizer" %}
+                <!-- Organizer navigation -->
+                {% include "nav_bars/nav_organizer.html" %}
+            {% elif request.user.groups.first.name == "Participant" %}
+                <!-- Participant navigation -->
+                {% include "nav_bars/nav_participant.html" %}
+            {% else %}
+                {% include "nav_bars/nav_login.html" %}
+            {% endif %}
         </div>
+        <script>
+    document.getElementById('mobile-menu-button').addEventListener('click', function() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenu.classList.toggle('hidden');
+    });
+</script>
+
   </nav>
   {% block content %}
   {% endblock content %}
