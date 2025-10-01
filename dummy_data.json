@@ -1,0 +1,352 @@
+[
+  {
+    "model": "events.category",
+    "pk": 1,
+    "fields": {
+      "name": "Technology",
+      "description": "Events related to technology, programming, AI, and innovation",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.category",
+    "pk": 2,
+    "fields": {
+      "name": "Sports",
+      "description": "Athletic competitions, tournaments, and fitness activities",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.category",
+    "pk": 3,
+    "fields": {
+      "name": "Music",
+      "description": "Concerts, festivals, and musical performances",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.category",
+    "pk": 4,
+    "fields": {
+      "name": "Education",
+      "description": "Workshops, seminars, training sessions, and academic events",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.category",
+    "pk": 5,
+    "fields": {
+      "name": "Arts & Culture",
+      "description": "Art exhibitions, cultural festivals, and creative gatherings",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 1,
+    "fields": {
+      "name": "AI Summit 2025",
+      "description": "Explore the latest trends in artificial intelligence and machine learning with industry leaders",
+      "date": "2025-11-15",
+      "time": "09:00:00",
+      "location": "Tech Convention Center, Silicon Valley",
+      "category": 1,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 2,
+    "fields": {
+      "name": "Web Development Bootcamp",
+      "description": "Intensive 3-day bootcamp covering React, Django, and modern web technologies",
+      "date": "2025-12-01",
+      "time": "10:00:00",
+      "location": "Digital Learning Hub, New York",
+      "category": 1,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 3,
+    "fields": {
+      "name": "Cybersecurity Conference",
+      "description": "Learn about the latest security threats and protection strategies",
+      "date": "2025-11-20",
+      "time": "08:30:00",
+      "location": "Security Institute, Washington DC",
+      "category": 1,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 4,
+    "fields": {
+      "name": "Blockchain Revolution",
+      "description": "Discover how blockchain is transforming industries worldwide",
+      "date": "2025-12-10",
+      "time": "13:00:00",
+      "location": "Crypto Arena, Miami",
+      "category": 1,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 5,
+    "fields": {
+      "name": "City Marathon 2025",
+      "description": "Annual 42km marathon through the city streets",
+      "date": "2025-10-20",
+      "time": "06:00:00",
+      "location": "City Center, Boston",
+      "category": 2,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 6,
+    "fields": {
+      "name": "Basketball Championship",
+      "description": "Inter-college basketball tournament finals",
+      "date": "2025-11-05",
+      "time": "18:00:00",
+      "location": "Sports Complex, Los Angeles",
+      "category": 2,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 7,
+    "fields": {
+      "name": "Yoga Retreat Weekend",
+      "description": "Relaxing weekend retreat focused on yoga and meditation",
+      "date": "2025-11-25",
+      "time": "07:00:00",
+      "location": "Serenity Resort, Colorado",
+      "category": 2,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 8,
+    "fields": {
+      "name": "Swimming Competition",
+      "description": "State-level swimming championship for all age groups",
+      "date": "2025-12-15",
+      "time": "14:00:00",
+      "location": "Olympic Pool, Chicago",
+      "category": 2,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 9,
+    "fields": {
+      "name": "Rock Music Festival",
+      "description": "Three-day festival featuring top rock bands from around the world",
+      "date": "2025-11-30",
+      "time": "16:00:00",
+      "location": "Desert Grounds, Arizona",
+      "category": 3,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 10,
+    "fields": {
+      "name": "Classical Piano Concert",
+      "description": "Evening of classical piano performances by renowned artists",
+      "date": "2025-10-28",
+      "time": "19:30:00",
+      "location": "Symphony Hall, Vienna",
+      "category": 3,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 11,
+    "fields": {
+      "name": "Jazz Night",
+      "description": "Live jazz performances in an intimate setting",
+      "date": "2025-11-12",
+      "time": "20:00:00",
+      "location": "Blue Note Club, New Orleans",
+      "category": 3,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 12,
+    "fields": {
+      "name": "Electronic Music Rave",
+      "description": "All-night electronic music party with top DJs",
+      "date": "2025-12-20",
+      "time": "22:00:00",
+      "location": "Warehouse District, Berlin",
+      "category": 3,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 13,
+    "fields": {
+      "name": "Data Science Workshop",
+      "description": "Hands-on workshop on data analysis and visualization techniques",
+      "date": "2025-10-25",
+      "time": "09:30:00",
+      "location": "University Campus, Stanford",
+      "category": 4,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 14,
+    "fields": {
+      "name": "Public Speaking Masterclass",
+      "description": "Learn the art of confident and effective public speaking",
+      "date": "2025-11-18",
+      "time": "14:00:00",
+      "location": "Business Center, London",
+      "category": 4,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 15,
+    "fields": {
+      "name": "Digital Marketing Seminar",
+      "description": "Comprehensive seminar on modern digital marketing strategies",
+      "date": "2025-12-05",
+      "time": "11:00:00",
+      "location": "Marketing Hub, Toronto",
+      "category": 4,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 16,
+    "fields": {
+      "name": "Leadership Training",
+      "description": "Develop essential leadership and management skills",
+      "date": "2025-11-22",
+      "time": "08:00:00",
+      "location": "Corporate Center, Singapore",
+      "category": 4,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 17,
+    "fields": {
+      "name": "Contemporary Art Exhibition",
+      "description": "Showcase of modern and contemporary artworks from emerging artists",
+      "date": "2025-10-30",
+      "time": "12:00:00",
+      "location": "Modern Art Gallery, Paris",
+      "category": 5,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 18,
+    "fields": {
+      "name": "Cultural Heritage Festival",
+      "description": "Celebration of traditional music, dance, and cuisine",
+      "date": "2025-11-08",
+      "time": "15:00:00",
+      "location": "Heritage Park, Mumbai",
+      "category": 5,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 19,
+    "fields": {
+      "name": "Photography Workshop",
+      "description": "Learn advanced photography techniques from professional photographers",
+      "date": "2025-12-12",
+      "time": "10:30:00",
+      "location": "Studio Space, Tokyo",
+      "category": 5,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 20,
+    "fields": {
+      "name": "Theatre Performance",
+      "description": "Classic drama performed by award-winning theatre troupe",
+      "date": "2025-11-28",
+      "time": "19:00:00",
+      "location": "National Theatre, Sydney",
+      "category": 5,
+      "event_image": "default_event_img.png",
+      "created_at": "2025-01-01T10:00:00Z",
+      "updated_at": "2025-01-01T10:00:00Z"
+    }
+  }
+]

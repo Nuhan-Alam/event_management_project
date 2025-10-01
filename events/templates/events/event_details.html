@@ -151,7 +151,18 @@
                     <button type='submit' class="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-700 transition">Delete Event</button>
                   </form>
                 </div>
-              {% endif %}
+              {% else %}
+          {% if request.user in event.participants.all %}
+            <span class="px-4 py-2 bg-gray-400 text-white rounded">Already selected</span>
+          {% else %}
+            <form method="post" action="{% url 'rsvp-event' event.id %}">
+              {% csrf_token %}
+              <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">
+                Interested to Go
+              </button>
+            </form>
+          {% endif %}
+          {% endif %}
       
           </div>
         </div>
