@@ -1,0 +1,19 @@
+<section class="my-10 flex items-center justify-center h-[30vh] bg-gray-50">
+  <div class="w-full px-4 md:w-1/2">
+    <form method="GET" action="{% url 'search' %}" class="flex flex-col md:flex-row items-center md:items-stretch">
+      <input 
+        type="text" 
+        name="search"
+        placeholder="Search for events..." 
+        class="flex md:flex-1 px-6 py-3 border border-gray-300 rounded-lg md:rounded-r-none shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-lg"
+        value="{{ request.GET.search }}"
+      />
+      <button 
+        type="submit"
+        class="px-3 md:px-6 py-2 md:py-3 my-3 md:my-0 bg-indigo-600 text-white rounded-lg md:rounded-l-none md:w-auto hover:bg-indigo-700 transition font-medium"
+      >
+        Search
+      </button>
+    </form>
+  </div>
+</section>

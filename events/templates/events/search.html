@@ -4,29 +4,10 @@
 
 {% block content %}
     {% comment %} level-2 serach_bar {% endcomment %}
-    <section class="flex items-center justify-center h-[30vh] bg-gray-50">
-      <div class="w-1/2">
-        <form method="GET" action="{% url 'search' %}" class="flex">
-          <input 
-            type="text" 
-            name="search"
-            placeholder="Search for events..." 
-            class="flex-1 px-6 py-3 border border-gray-300 rounded-l-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-lg"
-            value="{{ request.GET.search }}"
-          />
-          <button 
-            type="submit"
-            class="px-6 py-3 bg-indigo-600 text-white rounded-r-lg hover:bg-indigo-700 transition font-medium"
-          >
-            Search
-          </button>
-        </form>
-      </div>
-    </section>
-
+    {% include 'search_section.html'%}
     {% comment %} level-4 Lists {% endcomment %}
     <!-- Events Section -->
-    <section class="bg-gray-100 px-4 py-8">
+    <section class="bg-gray-100 px-4 md:px-32 py-8">
       <div class="space-y-6 flex flex-col items-center">
         {% if not event_list %}
         <div class="text-center py-8">
@@ -35,21 +16,11 @@
             <a href="{% url 'home' %}" class="text-indigo-600 hover:text-indigo-800">← Back to all events</a>
         </div>
     {% else %}
-        {% for event in event_list %}
-          <!-- Event Row 1 -->
-        <div class=" shadow-md rounded-lg p-4 w-1/2" style="background-image: url('{% static 'pic.png' %}');">
-          <div class="mb-2 text-center">
-            <h3 class="text-5xl	 font-semibold text-white">{{event.name}}</h3>
-          </div>
-          <div class="mb-4 text-white">
-            <p>{{event.description}}</p>
-          </div>
-          <div class="flex justify-between">
-            <a href="{% url 'event_details' event.id %}" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition text-center">Details</a>
-            <a href='{% url "update_event" event.id %}' class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">Edit</a>
-          </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {% for event in event_list %}
+            {% include 'events/event_card.html'%}
+          {% endfor %}
         </div>
-        {% endfor %}
     {% endif %}
         
 

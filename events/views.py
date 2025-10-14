@@ -255,6 +255,7 @@ def search_events(request):
     context = {
         'event_list': events,
         'search_query': search_query,
+        'current_user': request.user,
     }
     return render(request, 'events/search.html', context)
 

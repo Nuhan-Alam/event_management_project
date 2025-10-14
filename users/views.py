@@ -189,7 +189,7 @@ def activate_user(request, user_id, token):
 @login_required 
 def my_list(request):
     user_events = request.user.registered_events.all()
-    return render(request, 'participant/my_list.html', {'event_list': user_events})
+    return render(request, 'participant/my_list.html', {'event_list': user_events,'current_user': request.user,})
 # No:4 Conversion to class based view
 class MyListView(LoginRequiredMixin, TemplateView):
     template_name = 'participant/my_list.html'
@@ -198,6 +198,7 @@ class MyListView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         user_events = self.request.user.registered_events.all()
         context['event_list'] = user_events
+        context['current_user'] = self.request.user
         return context
 
 # No:2 Conversion to class based view
