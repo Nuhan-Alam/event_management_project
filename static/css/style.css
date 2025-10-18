@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
 .margin{
     margin: 50px;
     margin-top: 50px;
@@ -16,4 +17,10 @@
     display: inline-block !important;
     width: auto !important;
     margin-right: 10px;
+}
+
+.bad-script-regular {
+  font-family: "Bad Script", cursive !important;
+  font-weight: 400;
+  font-style: normal;
 }

@@ -3,9 +3,7 @@
 {% block title %}Events{% endblock title %}
 
 {% block content %}
-<div class="w-full flex justify-center items-center h-[400px] bg-[url('https://res.cloudinary.com/dbgsrmvgi/image/upload/v1760749488/rectszxc1_brdzag.png')] bg-cover bg-center text-white px-2 text-2xl md:text-4xl">
-  <p class="w-1/2 md:w-1/3">Easy Solution to handle all your Events.</p>
-</div>
+{% include 'hero_section.html'%}
 {% if counts.total == 0%}
   {% comment %} Empty List {% endcomment %}
   {% include 'empty_list.html' with message="No Event has been added yet!"%}

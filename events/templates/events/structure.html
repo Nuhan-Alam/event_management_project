@@ -7,19 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-  {% comment %} <link rel="stylesheet" href="{% static 'css/output.css' %}"> {% endcomment %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
   </head>
 
   <body>
     {% comment %} Level-1 Nav-Bar {% endcomment %}
-     <nav class="bg-white shadow-md flex-1">
+     <nav class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md flex-1">
         <div class="max-w-7xl mx-auto px-2 lg:px-8">
         <div class="flex justify-between items-center h-16">
             <div class='flex'>
               <img src="{% static 'logo_black.png' %}" alt="" class = 'w-10 m-1'>
               <div class="flex-shrink-0 ">
-              <h2 class='text-xl font-bold text-indigo-600'>What's Today?</h2>
-              <h2 class='text-sm font-normal text-black'>Manage your events</h2>
+              <h2 class='text-xl font-bold text-white'>What's Today?</h2>
+              <h2 class='text-sm font-normal text-white'>Manage your events</h2>
             </div>
             </div>
             <div class="hidden md:flex space-x-4"> 
@@ -39,7 +39,7 @@
     
               <!-- Mobile menu button -->
               <div class="md:hidden flex items-center">
-              <button id="mobile-menu-button" class="text-gray-700 focus:outline-none focus:text-indigo-600">
+              <button id="mobile-menu-button" class="text-white">
                   <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M4 6h16M4 12h16M4 18h16"/>
@@ -70,8 +70,8 @@
         mobileMenu.classList.toggle('hidden');
     });
 </script>
-
   </nav>
+  
   {% block content %}
   {% endblock content %}
   </body>
