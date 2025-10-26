@@ -76,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'eventManagement.wsgi.application'
+WSGI_APPLICATION = 'eventManagement.wsgi.app'
 
 
 
