@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
-
+from cloudinary.models import CloudinaryField
 
 class CustomUser(AbstractUser):
-    profile_image = models.ImageField(
-        upload_to='profile_images', blank=True, default='profile_images/default.png')
+
+    profile_image = CloudinaryField('image', blank=True, null=True, default='https://res.cloudinary.com/dbgsrmvgi/image/upload/v1761485514/default_k1ou2x.png')
+    
     number = models.CharField(max_length=13)
 
     def clean(self):

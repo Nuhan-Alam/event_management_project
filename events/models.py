@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import EmailValidator
 from django.contrib.auth.models import User, Permission, Group
 from django.conf import settings
+from cloudinary.models import CloudinaryField
 class Category(models.Model):
     """
     Category model for event classification
@@ -37,8 +38,7 @@ class Event(models.Model):
         blank=True
     )
 
-    event_image = models.ImageField(upload_to='event_images',  blank=True, null=True,
-                              default="default_event_img.png")
+    event_image = CloudinaryField('image', blank=True, null=True, default='https://res.cloudinary.com/dbgsrmvgi/image/upload/v1761485481/065b9bff-better-meetings-500x400-1_dr1rfj.png')
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

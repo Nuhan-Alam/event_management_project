@@ -13,6 +13,9 @@ import dj_database_url
 from pathlib import Path
 import os
 from decouple import config
+import cloudinary
+import cloudinary.uploader
+from cloudinary.utils import cloudinary_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,7 +25,7 @@ AUTH_USER_MODEL = 'users.CustomUser'
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-n6yy&54air3hzsc+opo3__6uemdf(hek(syx0ip=1z-5a@w1ep'
+SECRET_KEY = config('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -186,3 +189,13 @@ MEDIA_ROOT = BASE_DIR / 'media'
 LOGIN_URL = '/users/sign-in/'
 LOGIN_REDIRECT_URL = '/events/event-list/'
 LOGOUT_REDIRECT_URL = '/users/sign-in/'
+
+# Cloudinary
+# Configuration       
+cloudinary.config( 
+    cloud_name = config('CLOUDINARY_NAME'), 
+    api_key = config('CLOUDINARY_API_KEY'), 
+    api_secret =  config('CLOUDINARY_API_SECRET'), 
+    secure=True
+)
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

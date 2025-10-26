@@ -269,7 +269,10 @@ class ProfileView(TemplateView):
         context['email'] = user.email
         context['name'] = user.get_full_name()
         context['number'] = user.number
-        context['profile_image'] = user.profile_image
+        if user.profile_image:
+            context['profile_image_url'] = user.profile_image.url
+        else:
+            context['profile_image_url'] = 'https://res.cloudinary.com/dbgsrmvgi/image/upload/v1761485514/default_k1ou2x.png'
 
         context['member_since'] = user.date_joined
         context['last_login'] = user.last_login
