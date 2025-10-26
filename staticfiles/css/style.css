@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
+.margin{
+    margin: 50px;
+    margin-top: 50px;
+    margin-left: 100px;
+}
+
+.margin_y{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.margin_heading{
+    margin-bottom: 50px;
+}
+.date-field-container select {
+    display: inline-block !important;
+    width: auto !important;
+    margin-right: 10px;
+}
+
+.bad-script-regular {
+  font-family: "Bad Script", cursive !important;
+  font-weight: 400;
+  font-style: normal;
+}
