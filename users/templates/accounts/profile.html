@@ -28,11 +28,11 @@
       </div>
 
       <!-- Main Content -->
-      <main class="flex-1 p-8">
-        <h1 class="text-3xl font-bold text-gray-800 mb-8">User Profile</h1>
+     <main class="flex-1 p-1 md:p-8 pt-5 ml-0 md:ml-64">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">User Profile</h1>
 
         <div class="bg-white shadow-md rounded-lg p-6">
-          <div class="flex items-center mb-6">
+          <div class="flex flex-col md:flex-row items-center mb-6">
     
             <img
               src="{{ profile_image_url }}"
@@ -41,7 +41,7 @@
             />
             <div>
               <h2 class="text-2xl font-semibold text-gray-800">{{name}}</h2>
-              <p class="text-gray-600">{{request.user.groups.first.name}}</p>
+              <p class="text-gray-600">Role: {{request.user.groups.first.name}}</p>
             </div>
           </div>
 
@@ -73,7 +73,32 @@
             </div>
           </div>
         </div>
-      </main>
-    </div>
+      </main> 
+    </div> 
+    
   </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.querySelector('[data-drawer-toggle="separator-sidebar"]');
+    const sidebar = document.getElementById('separator-sidebar');
+    
+    if (toggleButton && sidebar) {
+        // Toggle sidebar
+        toggleButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            sidebar.classList.toggle('-translate-x-full');
+        });
+        
+        // Close sidebar when clicking outside (mobile only)
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth < 640 && 
+                !sidebar.contains(e.target) && 
+                !toggleButton.contains(e.target) &&
+                !sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.add('-translate-x-full');
+            }
+        });
+    }
+});
+</script>
   {% endblock content %}
