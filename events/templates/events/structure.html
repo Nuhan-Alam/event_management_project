@@ -15,12 +15,12 @@
      <nav class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md flex-1">
         <div class="max-w-7xl mx-auto px-2 lg:px-8">
         <div class="flex justify-between items-center h-16">
-            <div class='flex'>
+            <div class='flex ml-5 md:ml-10 gap-2'>
               <img src="https://res.cloudinary.com/dbgsrmvgi/image/upload/v1761561563/logo_white_usu8kl.png" alt="" class = 'w-10 m-1'>
-              <div class="flex-shrink-0 ">
+              <div class="flex-shrink-0">
               <h2 class='text-xl font-bold text-white'>What's Today?</h2>
               <h2 class='text-sm font-normal text-white'>Manage your events</h2>
-            </div>
+              </div>
             </div>
             <div class="hidden md:flex space-x-4"> 
               {% if request.user.groups.first.name == "Admin" %}
@@ -126,12 +126,12 @@ document.addEventListener('DOMContentLoaded', function() {
   <footer class="bg-gray-800 text-white py-8 ">
       <div class="container mx-auto px-6 md:px-20">
         <div class="flex flex-wrap justify-between">
-          <div class="w-full md:w-1/4 mb-8 md:mb-0">
+          <div class="flex flex-col justify-center items-center w-auto md:w-1/4 mb-8 md:mb-0">
             <div class='flex items-center'>
               <img src="https://res.cloudinary.com/dbgsrmvgi/image/upload/v1761561563/logo_white_usu8kl.png" alt="" class = 'w-10 m-2'>
-              <h3 class="text-3xl font-semibold">What's Today?</h3>
+              <h3 class="text-2xl md:text-3xl font-semibold">What's Today?</h3>
             </div>
-            <p class="text-gray-400">
+            <p class="text-center text-gray-400">
               Easy Solution to handle all your events
             </p>
           </div>
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div
           class="border-t border-gray-700 mt-12 pt-8 text-sm text-center text-gray-400"
         >
-          &copy; 2023 TaskMaster. All rights reserved.
+          &copy; 2025 What's Today?. All rights reserved.
         </div>
       </div>
     </footer>

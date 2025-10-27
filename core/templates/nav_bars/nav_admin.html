@@ -1,5 +1,5 @@
  <div class="flex flex-col md:flex-row">
-    <a href="{% url 'admin-dashboard' %}" class="text-white hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Dashboard</a>
+    <a href="{% url 'admin-dashboard' %}" class="text-white hover:text-indigo-200 font-medium px-3 py-2 rounded-md transition">Dashboard</a>
     
     {% comment %} Group {% endcomment %}
     {% comment %} Event {% endcomment %}
@@ -13,8 +13,8 @@
         <!-- Dropdown Menu -->
 <div class="dropdown-menu hidden md:absolute relative md:left-0 md:mt-2 w-full md:w-48 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-md md:shadow-lg z-50">
         <div class="py-1">
-                <a href="{% url 'create-group' %}" class="block px-4 py-2 text-sm text-white hover:text-indigo-600 transition">Create Group</a>
-                <a href="{% url 'group-list' %}" class="block px-4 py-2 text-sm text-white hover:text-indigo-600 transition">Existing Groups</a>
+                <a href="{% url 'create-group' %}" class="block px-4 py-2 text-sm text-white hover:text-indigo-200 transition">Create Group</a>
+                <a href="{% url 'group-list' %}" class="block px-4 py-2 text-sm text-white hover:text-indigo-200 transition">Existing Groups</a>
             </div>
         </div>
     </div>
@@ -29,17 +29,17 @@
         <!-- Dropdown Menu -->
 <div class="dropdown-menu hidden md:absolute relative md:left-0 md:mt-2 w-full md:w-48 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-md md:shadow-lg z-50">
         <div class="py-1">
-                <a href="{% url 'create_event' %}" class="block px-4 py-2 text-sm text-white hover:text-indigo-600 transition">Create Event</a>
-                <a href="{% url 'home' %}" class="block px-4 py-2 text-sm text-white hover:text-indigo-600 transition">Event List</a>
+                <a href="{% url 'create_event' %}" class="block px-4 py-2 text-sm text-white hover:text-indigo-200 transition">Create Event</a>
+                <a href="{% url 'home' %}" class="block px-4 py-2 text-sm text-white hover:text-indigo-200 transition">Event List</a>
             </div>
         </div>
     </div>
-    <a href="{% url 'participants' %}" class="text-white hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Participants</a>
-    <a href="{% url 'categories'%}" class="text-white hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Categories</a>
-    {% comment %} <a href="{% url 'dashboard'%}" class="text-white hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Dashboard</a> {% endcomment %}
-    <a href="{% url 'profile'%}" class="text-white hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Profile</a>
+    <a href="{% url 'participants' %}" class="text-white hover:text-indigo-200 font-medium px-3 py-2 rounded-md transition">Participants</a>
+    <a href="{% url 'categories'%}" class="text-white hover:text-indigo-200 font-medium px-3 py-2 rounded-md transition">Categories</a>
+    {% comment %} <a href="{% url 'dashboard'%}" class="text-white hover:text-indigo-200 font-medium px-3 py-2 rounded-md transition">Dashboard</a> {% endcomment %}
+    <a href="{% url 'profile'%}" class="text-white hover:text-indigo-200 font-medium px-3 py-2 rounded-md transition">Profile</a>
     <form method="POST" action="{% url 'logout' %}">
         {% csrf_token %}
-        <button type="submit" class="text-white hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition">Logout</button>
+        <button type="submit" class="text-white hover:text-indigo-200 font-medium px-3 py-2 rounded-md transition">Logout</button>
     </form>
 </div>
