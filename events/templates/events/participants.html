@@ -15,7 +15,7 @@
     <!-- Second Section -->
     <section>
       {% if participants %}
-        <h2 class="text-5xl text-center font-medium mb-6 margin_heading">All Participants</h2>
+        <h2 class="text-3xl md:text-5xl text-center font-medium mb-6 margin_heading">All Participants</h2>
         {% if messages %}
                   {% for message in messages %}
                       {% if message.tags == 'success' %}
@@ -23,33 +23,35 @@
                       {% endif %}
                   {% endfor %}
               {% endif %}
-        <table class="w-full table-auto">
-          <thead>
-            <tr>
-              <th class="px-3 py-2 text-center font-medium text-gray-700">Name</th>
-              <th class="px-3 py-2 text-center font-medium text-gray-700" colspan="2">Email</th>
-              <th class="px-3 py-2"></th>
-              <th class="px-3 py-2"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for participant in participants %}
-            <tr>
-              <td class="px-3 py-2 text-center">{{participant.first_name}}</td>
-              <td class="px-3 py-2 text-center" colspan="2">{{participant.email}}</td>
-              <td class="px-3 py-2">
-                <a href='{% url "update_people" participant.id %}' class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">Edit</a>
-              </td>
-              <td class="px-3 py-2">
-                <form action='{% url "delete_people" participant.id %}' method='POST'>
-              {% csrf_token %}
-              <button type='submit' class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700 transition">Delete</button>
-            </form>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+              <div class="overflow-x-auto border-x-2">
+                <table class="w-full md:w-2/3 mx-auto table-auto">
+                  <thead>
+                    <tr>
+                      <th class="px-3 py-2 text-center font-medium text-gray-700">Name</th>
+                      <th class="px-3 py-2 text-center font-medium text-gray-700" colspan="2">Email</th>
+                      <th class="px-3 py-2"></th>
+                      <th class="px-3 py-2"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for participant in participants %}
+                    <tr>
+                      <td class="px-3 py-2 text-center">{{participant.first_name}}</td>
+                      <td class="px-3 py-2 text-center" colspan="2">{{participant.email}}</td>
+                      <td class="px-3 py-2">
+                        <a href='{% url "update_people" participant.id %}' class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">Edit</a>
+                      </td>
+                      <td class="px-3 py-2">
+                        <form action='{% url "delete_people" participant.id %}' method='POST'>
+                      {% csrf_token %}
+                      <button type='submit' class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700 transition">Delete</button>
+                    </form>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
       {% else %}
           {% comment %} Empty List {% endcomment %}
           {% include 'empty_list.html' with message="No participant has been added yet"%}

@@ -5,7 +5,7 @@
   <div class="bg-gray-100">
     <div class="flex min-h-screen">
       <!-- Sidebar -->
-      <aside class="w-64 bg-white shadow-md">
+      {% comment %} <aside class="w-64 bg-white shadow-md">
         <div class="p-4">
           <h2 class="text-xl font-semibold text-gray-800">Menu</h2>
         </div>
@@ -22,7 +22,10 @@
             >Change Password</a
           >
         </nav>
-      </aside>
+      </aside> {% endcomment %}
+      <div>
+        {% include "accounts/profile_sidebar.html" %}
+      </div>
 
       <!-- Main Content -->
       <main class="flex-1 p-8">
