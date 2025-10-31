@@ -119,11 +119,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
   </nav>
-  
-  {% block content %}
-  {% endblock content %}
+  <div class="min-h-screen flex flex-col justify-center items-center">
+    {% block content %}
+    {% endblock content %}
+  </div>
   </body>
-  <footer class="bg-gray-800 text-white py-8 ">
+  <footer class="bg-gray-800 text-white py-8 z-50 ">
       <div class="container mx-auto px-6 md:px-20">
         <div class="flex flex-wrap justify-between">
           <div class="flex flex-col justify-center items-center text-center w-auto md:w-1/4 mb-8 md:mb-0">
