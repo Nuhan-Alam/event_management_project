@@ -21,11 +21,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from debug_toolbar.toolbar import debug_toolbar_urls
 from .views import redirect_to_home
+from core.views import intro
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', redirect_to_home,name='root'),
+    path('intro/', intro ,name='introduction'),
     path('events/', include("events.urls")),
     path('users/', include("users.urls")),
     path('no-permission/', no_permission, name='no-permission')

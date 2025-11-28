@@ -4,4 +4,4 @@ def redirect_to_home(request):
     if request.user.is_authenticated:
         return redirect('home')
     else:
-        return redirect('sign-in')
+        return redirect('introduction')

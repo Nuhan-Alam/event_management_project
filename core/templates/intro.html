@@ -1,0 +1,67 @@
+{% extends "events/structure.html" %}
+{% block title %}Login{% endblock title %}
+{% block content %}
+    
+
+    <!-- Carousel Section -->
+    <div class="relative min-w-full ">
+        <div class="relative min-h-screen">
+            <!-- Carousel Images -->
+            <div class="carousel-item absolute w-full h-full transition-opacity duration-500">
+                <img src="https://cdn.pixabay.com/photo/2016/12/03/15/44/fireworks-1880045_1280.jpg" alt="Event 1" class="w-full h-full object-cover">
+            </div>
+            <div class="carousel-item absolute w-full h-full transition-opacity duration-500 opacity-0">
+                <img src="https://cdn.pixabay.com/photo/2013/10/02/15/00/stadium-189777_1280.jpg" alt="Event 2" class="w-full h-full object-cover">
+            </div>
+            <div class="carousel-item absolute w-full h-full transition-opacity duration-500 opacity-0">
+                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=800" alt="Event 3" class="w-full h-full object-cover">
+            </div>
+        </div>
+        <div class="absolute inset-0 bg-black/80 z-10 px-2 md:px-0">
+            <div class="relative z-20 flex flex-col items-center justify-center min-h-screen">
+            <h1 class="text-3xl md:text-5xl bad-script-regular text-white text-center">Handle all your events from one spot</h1>
+            <div class='text-md md:text-2xl text-white bad-script-regular pt-5 flex flex-col gap-3'>
+                <li>Craete Account</li>
+            <li>Keep track of your desired events</li>
+            <li>Get Notified</li>
+            </div>
+
+                <div class='pt-7 flex flex-row gap-5 pr-5 md:pr-20'>
+                  <a href="{% url 'sign-up' %}" class="text-white border-2 border-white hover:border-indigo-700 hover:text-indigo-700 hover:bg-white font-medium px-3 py-2 rounded-md transition">Create Account</a>
+                    <a href="{% url 'sign-in'%}" class="text-white border-2 border-white hover:border-indigo-700 hover:text-indigo-700 hover:bg-white font-medium px-3 py-2 rounded-md transition">Login</a>
+                </div>
+            
+            
+        </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-item');
+        const indicators = document.querySelectorAll('.indicator');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.opacity = i === index ? '1' : '0';
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        // Auto-advance every 1 second
+        setInterval(nextSlide, 2500);
+
+        // Optional: Click indicators to jump to specific slide
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentSlide = index;
+                showSlide(currentSlide);
+            });
+        });
+    </script>
+{% endblock content %}
